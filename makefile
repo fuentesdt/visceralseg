@@ -12,4 +12,4 @@ qainput:
 	@echo PATH $(words $(LISTPATH))
 $(WORKDIR)/%/image.nii.gz:
 	mkdir -p $(@D)
-	dcm2niix  -o $(@D) -f $(basename $(basename $(@F)))  -z y /mnt/$(word $(shell sed 1d nashvisceral/wide.csv | cut -d, -f2 | grep -n $* |cut -f1 -d: ), $(LISTPATH)) 
+	dcm2niix -m y -o $(@D) -f $(basename $(basename $(@F)))  -z y /mnt/$(word $(shell sed 1d nashvisceral/wide.csv | cut -d, -f2 | grep -n $* |cut -f1 -d: ), $(LISTPATH)) 
