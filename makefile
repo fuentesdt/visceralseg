@@ -12,6 +12,8 @@ qainput:
 	@echo PATH $(words $(LISTPATH))
 $(WORKDIR)/%/image.nii.gz:
 	mkdir -p $(@D)
+	echo $*
+	echo $(shell sed 1d nashvisceral/wide.csv | cut -d, -f2 | grep -n $* |cut -f1 -d: )
 	dcm2niix -m y -o $(@D) -f $(basename $(basename $(@F)))  -z y /mnt/$(word $(shell sed 1d nashvisceral/wide.csv | cut -d, -f2 | grep -n $* |cut -f1 -d: ), $(LISTPATH)) 
 $(WORKDIR)/%/generatetrain: $(WORKDIR)/%/image.nii.gz
 	c3d -verbose $<  -info 
